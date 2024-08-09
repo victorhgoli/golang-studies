@@ -11,6 +11,7 @@ import (
 	"estudo-test/integration"
 	"estudo-test/internal/repository"
 	"estudo-test/internal/service"
+	"estudo-test/pkg/kafka/consumer"
 	"estudo-test/routes"
 	"net"
 	"net/http"
@@ -72,8 +73,13 @@ func main() {
 		}
 	}()
 
-	log.Infof("Servidor iniciado na porta 8080")
-	if err := http.ListenAndServe(":8080", r); err != nil {
-		log.Fatal(err)
-	}
+	go func() {
+		log.Infof("Servidor iniciado na porta 8080")
+		if err := http.ListenAndServe(":8080", r); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	consumer.StartTesteConsumer()
+
 }
