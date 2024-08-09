@@ -10,11 +10,12 @@ import (
 	"github.com/graphql-go/handler"
 )
 
-func NewRouter(cadController controller.CadController) http.Handler {
+func NewRouter(cadController controller.CadController, asyncCad controller.AsyncCadController) http.Handler {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
+	r.Post("/asynccadastrar", asyncCad.Cadastrar)
 	r.Post("/cadastrar", cadController.Cadastrar)
 	r.Get("/usuario/{id}", cadController.Buscar)
 

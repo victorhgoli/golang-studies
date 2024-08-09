@@ -53,8 +53,9 @@ func main() {
 	pedidoService := service.NewPedidoService(pedidoRepo)
 
 	cadController := controller.NewCadController(userService, pedidoService, log)
+	asyncCadController := controller.NewAsyncCadController(userService, pedidoService, log)
 	graphql.UserService = userService
-	r := routes.NewRouter(cadController)
+	r := routes.NewRouter(cadController, asyncCadController)
 
 	// Iniciar servidor gRPC
 	grpcServer := grpc.NewServer()
@@ -80,6 +81,7 @@ func main() {
 		}
 	}()
 
+	consumer := consumer.NewTesteConsumer(&userService)
 	consumer.StartTesteConsumer()
 
 }
