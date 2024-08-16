@@ -14,7 +14,7 @@ require (
 	google.golang.org/grpc v1.62.1
 	google.golang.org/protobuf v1.33.0
 )
- 
+
 require github.com/confluentinc/confluent-kafka-go v1.9.2
 
 require (
