@@ -13,16 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get the latest commit on main
-        id: main_commit
+      - name: Get the latest commit date on main
+        id: main_commit_date
         run: |
           git fetch origin main
-          echo "::set-output name=commit::$(git rev-parse origin/main)"
+          MAIN_COMMIT_DATE=$(git log -1 --format=%ct origin/main)
+          echo "::set-output name=date::$MAIN_COMMIT_DATE"
 
-      - name: Get the latest commit on the PR
-        id: pr_commit
-        run: echo "::set-output name=commit::${{ github.event.pull_request.head.sha }}"
+      - name: Get the latest commit date on the PR
+        id: pr_commit_date
+        run: |
+          PR_COMMIT_DATE=$(git log -1 --format=%ct ${{ github.event.pull_request.head.sha }})
+          echo "::set-output name=date::$PR_COMMIT_DATE"
 
       - name: Print message
-        if: steps.main_commit.outputs.commit != steps.pr_commit.outputs.commit
+        if: steps.main_commit_date.outputs.date < steps.pr_commit_date.outputs.date
         run: echo "passou"
