@@ -1,9 +1,8 @@
 name: Print Message on Push
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [open, syncronized]
 
 jobs:
   print-message:
