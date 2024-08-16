@@ -25,7 +25,7 @@ jobs:
       - name: Get the latest commit date on the PR
         id: pr_commit_date
         run: |
-          echo "::set-output name=date::${{ github.event.pull_request.head.commit.committer.date }}"
+          echo "::set-output name=date::$(git log -1 --format=%cI ${{ github.event.pull_request.head.ref }})"
 
       - name: Print the commit date on the PR
         run: echo "The latest commit date on the PR is ${{ steps.pr_commit_date.outputs.date }}"
