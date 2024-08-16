@@ -2,7 +2,7 @@ name: Print Message on Push
 
 on:
   pull_request:
-    types: [open, syncronized]
+    types: [opened, synchronize, reopened]
 
 jobs:
   print-message:
