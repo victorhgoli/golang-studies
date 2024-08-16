@@ -13,27 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get the latest commit hash on main
-        id: main_commit
+      - name: Get the latest commit date on main
+        id: main_commit_date
         run: |
           git fetch origin main
-          echo "::set-output name=hash::$(git rev-parse origin/main)"
+          echo "::set-output name=date::$(git log -1 --format=%cI origin/main)"
 
-      - name: Get the latest commit hash on the PR
-        id: pr_commit
+      - name: Get the latest commit date on the PR
+        id: pr_commit_date
         run: |
-          echo "::set-output name=hash::${{ github.event.pull_request.head.sha }}"
+          echo "::set-output name=date::${{ github.event.pull_request.head.commit.committer.date }}"
 
-      - name: Check if main commit is an ancestor of PR commit
-        id: check_ancestor
-        run: |
-          git fetch origin main
-          if git merge-base --is-ancestor ${{ steps.main_commit.outputs.hash }} ${{ steps.pr_commit.outputs.hash }}; then
-            echo "::set-output name=ancestor::true"
-          else
-            echo "::set-output name=ancestor::false"
-          fi
-
-      - name: Print message
-        if: steps.check_ancestor.outputs.ancestor == 'false'
+      - name: Compare commit dates and print message
+        if: steps.main_commit_date.outputs.date < steps.pr_commit_date.outputs.date
         run: echo "passou"
