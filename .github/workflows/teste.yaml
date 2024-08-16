@@ -18,13 +18,17 @@ jobs:
         run: |
           git fetch origin main
           echo "::set-output name=date::$(git log -1 --format=%cI origin/main)"
-          echo "date ${date}"
+
+      - name: Print the commit date
+        run: echo "The latest commit date on main is ${{ steps.main_commit_date.outputs.date }}"
 
       - name: Get the latest commit date on the PR
         id: pr_commit_date
         run: |
           echo "::set-output name=date::${{ github.event.pull_request.head.commit.committer.date }}"
-          echo ${{ github.event.pull_request.head.commit.committer.date }}
+
+      - name: Print the commit date on the PR
+        run: echo "The latest commit date on the PR is ${{ steps.pr_commit_date.outputs.date }}"
 
       - name: Compare commit dates and print message
         if: steps.main_commit_date.outputs.date < steps.pr_commit_date.outputs.date
