@@ -30,5 +30,5 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 volumes:
-  mysql_data:
+  mysql_data: 
     driver: local
