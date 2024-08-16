@@ -20,7 +20,7 @@ func NewProducer() (Producer, error) {
 
 func (p *producer) ProduceMessage() error {
 
-	brokers := "localhost:9092 "
+	brokers := "localhost:9092"
 	topic := "create-user-topic"
 	message := "Hello, Kafka!"
 
