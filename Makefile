@@ -8,4 +8,4 @@ proto:
 
 mockgen -source=internal/repository/contract.go  -destination=tests/mocks/repository/repository.go
 mockgen -source=infra/http_client/http_client.go -destination=tests/mocks/http_client/http_client.go
-mockgen -source=integration/contract.go  -destination=tests/mocks/integration/integration.go
+mockgen -source=integration/contract.go  -destination=tests/mocks/integration/integration.go 
