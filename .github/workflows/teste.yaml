@@ -18,7 +18,7 @@ jobs:
         run: |
           git fetch origin main
           echo "::set-output name=date::$(git log -1 --format=%cI origin/main)"
-          echo $date
+          echo ${date}
 
       - name: Get the latest commit date on the PR
         id: pr_commit_date
