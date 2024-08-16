@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-       - name: Get the latest commit on main
+      - name: Get the latest commit on main
         id: main_commit
         run: |
           git fetch origin main
