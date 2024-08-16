@@ -32,6 +32,7 @@ type CadController interface {
 }
 
 func NewCadController(userService service.UserService, pedidoService service.PedidoService, log logger.Logger) CadController {
+	// Resolver dependências
 	return &cadController{
 		UserService:   userService,
 		PedidoService: pedidoService,

@@ -10,6 +10,13 @@ var UserService service.UserService
 
 //var pedidoService service.PedidoService
 
+/*
+	func NewUserResolver(userService service.UserService) UserResolver {
+		return &userResolver{
+			UserService: userService,
+		}
+	}
+*/
 func resolveUser(p graphql.ResolveParams) (interface{}, error) {
 	id, ok := p.Args["id"].(int)
 	if ok {

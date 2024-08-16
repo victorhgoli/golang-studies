@@ -18,6 +18,12 @@ require (
 require github.com/confluentinc/confluent-kafka-go v1.9.2
 
 require (
+	github.com/golobby/container/v3 v3.3.2 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
+	github.com/spf13/cobra v1.8.1 // indirect
+)
+
+require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/cenkalti/backoff v2.2.1+incompatible
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect

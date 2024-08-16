@@ -16,18 +16,6 @@ var userType = graphql.NewObject(
 	},
 )
 
-/*
-var pedidoType = graphql.NewObject(
-	graphql.ObjectConfig{
-		Name: "Pedido",
-		Fields: graphql.Fields{
-			"id":      &graphql.Field{Type: graphql.Int},
-			"produto": &graphql.Field{Type: graphql.String},
-			"userId":  &graphql.Field{Type: graphql.Int},
-		},
-	},
-)
-*/
 // Define o schema
 var Schema, _ = graphql.NewSchema(
 	graphql.SchemaConfig{
