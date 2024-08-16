@@ -24,6 +24,16 @@ jobs:
         run: |
           echo "::set-output name=hash::${{ github.event.pull_request.head.sha }}"
 
-      - name: Compare commits and print message
-        if: steps.main_commit.outputs.hash != steps.pr_commit.outputs.hash
+      - name: Check if main commit is an ancestor of PR commit
+        id: check_ancestor
+        run: |
+          git fetch origin main
+          if git merge-base --is-ancestor ${{ steps.main_commit.outputs.hash }} ${{ steps.pr_commit.outputs.hash }}; then
+            echo "::set-output name=ancestor::true"
+          else
+            echo "::set-output name=ancestor::false"
+          fi
+
+      - name: Print message
+        if: steps.check_ancestor.outputs.ancestor == 'false'
         run: echo "passou"
